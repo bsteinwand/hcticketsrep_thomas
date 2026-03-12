@@ -30,6 +30,7 @@ public class UserApplicationRoleServiceImpl implements UserApplicationRoleServic
     private final UserApplicationRoleMapper mapper;
     
     
+    
 
     public UserApplicationRoleServiceImpl(UserApplicationRoleRepository repository, UserRepository userRepository,
 			ApplicationRepository applicationRepository, ApplicationRoleRepository applicationRoleRepository,
@@ -82,6 +83,16 @@ public class UserApplicationRoleServiceImpl implements UserApplicationRoleServic
         return repository.findById(id)
                 .map(mapper::toResponseDto)
                 .orElseThrow(() -> new EntityNotFoundException("UserApplicationRole not found"));
+    }
+    
+    @Override
+    public List<UserApplicationRoleResponseDto> getByUserId(Integer userId) {
+    	
+    	List<UserApplicationRole> roles = repository.findByUserId(userId);
+    	
+    	return roles.stream()
+    			.map(mapper::toResponseDto)
+    			.toList();
     }
 
     @Override

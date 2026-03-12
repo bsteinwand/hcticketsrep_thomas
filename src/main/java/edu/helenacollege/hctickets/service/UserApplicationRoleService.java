@@ -15,6 +15,8 @@ public interface UserApplicationRoleService {
     UserApplicationRoleResponseDto findById(Integer id);
 
     List<UserApplicationRoleResponseDto> findAll();
+    
+    List<UserApplicationRoleResponseDto> getByUserId(Integer userId);
 
     void delete(Integer id);
 }

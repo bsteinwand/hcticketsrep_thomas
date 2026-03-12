@@ -6,5 +6,6 @@ public record TicketCreateDto(
         String status,
         Integer createdBy,
         Integer applicationId,
-        String visibility
+        String visibility,
+        String priority
 ) {}

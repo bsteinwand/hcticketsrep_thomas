@@ -1,0 +1,14 @@
+<form th:action="@{/tickets}" th:object="${ticket}" method="post">
+
+    <label>Title</label>
+    <input type="text" th:field="*{title}" />
+
+    <label>Description</label>
+    <textarea th:field="*{description}"></textarea>
+
+    <label>Priority</label>
+    <input type="text" th:field="*{priority}" />
+
+    <button type="submit">Create Ticket</button>
+
+</form>

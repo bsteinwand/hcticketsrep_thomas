@@ -5,5 +5,9 @@ public record TicketUpdateDto(
         String description,
         String status,
         String visibility,
-        Integer closedBy
+        Integer closedBy,
+        String priority
 ) {}
+
+
+

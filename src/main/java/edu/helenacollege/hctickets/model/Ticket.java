@@ -61,6 +61,9 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ClosedBy", nullable = false)
     private User closedBy;
+    
+    @Column(name = "priority")
+    private String priority;
 
     
 	public Ticket() {
@@ -160,6 +163,14 @@ public class Ticket {
 
 	public void setClosedBy(User closedBy) {
 		this.closedBy = closedBy;
+	}
+	
+	public String getPriority() {
+		return priority;
+	}
+	
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	@Override

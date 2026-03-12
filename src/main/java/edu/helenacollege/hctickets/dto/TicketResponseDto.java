@@ -12,5 +12,6 @@ public record TicketResponseDto(
         OffsetDateTime creationDate,
         String visibility,
         OffsetDateTime closedDate,
-        Integer closedBy
+        Integer closedBy,
+        String priority
 ) {}
