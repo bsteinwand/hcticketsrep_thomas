@@ -17,4 +17,6 @@ public interface TicketService {
     List<TicketResponseDto> findAll();
 
     void delete(Integer id);
+    
+    List<TicketResponseDto> getOpenTicketsByApplicationId(Integer applicationId);
 }

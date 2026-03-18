@@ -105,4 +105,15 @@ public class TicketServiceImpl implements TicketService {
     public void delete(Integer id) {
         ticketRepository.deleteById(id);
     }
+
+    @Override
+    public List<TicketResponseDto> getOpenTicketsByApplicationId(Integer applicationId) {
+
+        List<Ticket> tickets =
+                ticketRepository.findByApplicationIdAndStatus(applicationId, "OPEN");
+
+        return tickets.stream()
+                .map(mapper::toResponseDto)
+                .toList();
+    }
 }

@@ -1,0 +1,14 @@
+<h2>Open Tickets</h2>
+
+<div th:if="${tickets.isEmpty()}">
+    <p>No open tickets for this application.</p>
+</div>
+
+<div th:unless="${tickets.isEmpty()}">
+    <ul>
+        <li th:each="ticket : ${tickets}">
+            <span th:text="${ticket.title}"></span>
+            <a th:href="@{'/tickets/' + ${ticket.id}}">View Details</a>
+        </li>
+    </ul>
+</div>
