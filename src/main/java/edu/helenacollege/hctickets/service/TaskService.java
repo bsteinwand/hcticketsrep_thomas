@@ -15,6 +15,8 @@ public interface TaskService {
     TaskResponseDto findById(Integer id);
 
     List<TaskResponseDto> findAll();
+    
+    List<TaskResponseDto> findByTicketId(Integer ticketId);
 
     void delete(Integer id);
 }

@@ -13,6 +13,8 @@ public interface TicketCommentService {
     TicketCommentResponseDto update(Integer id, TicketCommentUpdateDto dto);
 
     TicketCommentResponseDto findById(Integer id);
+    
+    List<TicketCommentResponseDto> findByTicketId(Integer ticketId);
 
     List<TicketCommentResponseDto> findAll();
 

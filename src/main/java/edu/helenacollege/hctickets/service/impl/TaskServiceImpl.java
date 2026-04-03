@@ -90,4 +90,10 @@ public class TaskServiceImpl implements TaskService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
+
+	@Override
+	public List<TaskResponseDto> findByTicketId(Integer ticketId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

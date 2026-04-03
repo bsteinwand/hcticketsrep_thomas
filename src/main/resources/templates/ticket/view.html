@@ -1,0 +1,33 @@
+<h2 th:text="${ticket.title}"></h2>
+
+<p th:text="${ticket.description}"></p>
+
+<!-- COMMENTS -->
+<h3>Comments</h3>
+
+<div th:if="${comments.isEmpty()}">
+    <p>No comments available.</p>
+</div>
+
+<ul th:unless="${comments.isEmpty()}">
+    <li th:each="comment : ${comments}">
+        <a th:href="@{'/comments/' + ${comment.id}}">
+            <span th:text="${comment.text}"></span>
+        </a>
+    </li>
+</ul>
+
+<!-- TASKS -->
+<h3>Tasks</h3>
+
+<div th:if="${tasks.isEmpty()}">
+    <p>No tasks available.</p>
+</div>
+
+<ul th:unless="${tasks.isEmpty()}">
+    <li th:each="task : ${tasks}">
+        <a th:href="@{'/tasks/' + ${task.id}}">
+            <span th:text="${task.title}"></span>
+        </a>
+    </li>
+</ul>
