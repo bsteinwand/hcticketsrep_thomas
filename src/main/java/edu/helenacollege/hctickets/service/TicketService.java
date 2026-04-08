@@ -19,4 +19,6 @@ public interface TicketService {
     void delete(Integer id);
     
     List<TicketResponseDto> getOpenTicketsByApplicationId(Integer applicationId);
+    
+    void updateStatus(Integer ticketId, String status);
 }

@@ -116,4 +116,19 @@ public class TicketServiceImpl implements TicketService {
                 .map(mapper::toResponseDto)
                 .toList();
     }
+    
+    @Override
+    public void updateStatus(Integer ticketId, String status) {
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        if (status.equals(ticket.getStatus())) {
+            return;
+        }
+
+        ticket.setStatus(status);
+
+        ticketRepository.save(ticket);
+    }
 }

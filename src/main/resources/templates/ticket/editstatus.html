@@ -1,0 +1,33 @@
+<h1>Edit Ticket Status</h1>
+
+<p><strong>Title:</strong> <span th:text="${ticket.title}"></span></p>
+<p><strong>Description:</strong> <span th:text="${ticket.description}"></span></p>
+<p><strong>Current Status:</strong> <span th:text="${ticket.status}"></span></p>
+
+<form th:action="@{/tickets/{id}/editstatus(id=${ticket.id})}" method="post">
+
+    <label>Status:</label>
+    <select name="status">
+        <option value="Open">Open</option>
+        <option value="Closed">Closed</option>
+        <option value="Canceled">Canceled</option>
+    </select>
+
+    <button type="submit">Update Status</button>
+</form>
+
+<h2>Comments</h2>
+<ul>
+    <li th:each="comment : ${comments}">
+        <a th:href="@{/comments/{id}(id=${comment.id})}"
+           th:text="${comment.commentText}"></a>
+    </li>
+</ul>
+
+<h2>Tasks</h2>
+<ul>
+    <li th:each="task : ${tasks}">
+        <a th:href="@{/tasks/{id}(id=${task.id})}"
+           th:text="${task.title}"></a>
+    </li>
+</ul>

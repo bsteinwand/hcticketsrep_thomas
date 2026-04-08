@@ -118,4 +118,75 @@ public class TicketController {
 
 	    return "ticket/view";
 	}
+	
+	@GetMapping("/{ticketId}/editstatus")
+	public String editTicketStatus(
+	        @PathVariable Integer ticketId,
+	        Model model) {
+
+	    if (ticketId == null || ticketId <= 0) {
+	        model.addAttribute("error", "Invalid ticket ID");
+	        return "error";
+	    }
+
+	    TicketResponseDto ticket = ticketService.findById(ticketId);
+
+	    if (ticket == null) {
+	        model.addAttribute("error", "Ticket not found");
+	        return "error";
+	    }
+
+	    Integer userId = 1;
+
+	    var userApps = userApplicationRoleService.getByUserId(userId);
+
+	    boolean hasAccess = userApps.stream()
+	            .anyMatch(app -> app.appId().equals(ticket.applicationId()));
+
+	    if (!hasAccess) {
+	        model.addAttribute("error", "You do not have access to this ticket");
+	        return "error";
+	    }
+
+	    var comments = ticketCommentService.findByTicketId(ticketId);
+	    var tasks = taskService.findByTicketId(ticketId);
+
+	    model.addAttribute("ticket", ticket);
+	    model.addAttribute("comments", comments);
+	    model.addAttribute("tasks", tasks);
+
+	    return "ticket/editstatus";
+	}
+	
+	@PostMapping("/{ticketId}/editstatus")
+	public String updateTicketStatus(
+	        @PathVariable Integer ticketId,
+	        @RequestParam String status,
+	        Model model) {
+
+	    if (ticketId == null || ticketId <= 0) {
+	        model.addAttribute("error", "Invalid ticket ID");
+	        return "error";
+	    }
+
+	    TicketResponseDto ticket = ticketService.findById(ticketId);
+
+	    if (ticket == null) {
+	        model.addAttribute("error", "Ticket not found");
+	        return "error";
+	    }
+
+	    if (!status.equals("Open") && !status.equals("Closed") && !status.equals("Canceled")) {
+	        model.addAttribute("error", "Invalid status value");
+	        return "error";
+	    }
+
+	    if (status.equals(ticket.status())) {
+	        return "redirect:/tickets/" + ticketId;
+	    }
+
+	    ticketService.updateStatus(ticketId, status);
+
+	    return "redirect:/tickets/" + ticketId;
+	}
 }
